@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world-green
+  name: hello-world-green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-green
+  template:
+    metadata:
+      labels:
+        app: hello-world-green
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - image: avthart/hello-app:2.0.0
+          name: hello-world-green
+          ports:
+            - name: web
+              containerPort: 8080
+          env:
+            - name: BACKGROUND_COLOR
+              value: "green"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "150m"
+          # liveness probes to know when to restart a Container.
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: web
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          # readiness probes to know when a Container is ready to start accepting traffic.
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: web
+            initialDelaySeconds: 10
+            periodSeconds: 5

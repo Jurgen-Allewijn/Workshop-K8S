@@ -1,0 +1,6 @@
+alertmanager.enabled: false
+alertmanager.persistentVolume.enabled: false
+pushgateway.enabled: false
+pushgateway.persistentVolume.enabled: false
+server.persistentVolume.enabled: false
+server.persistentVolume.storageClass: local-storage

@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world
+  name: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+      #annotations:
+      #  prometheus.io/scrape: 'true'
+      #  prometheus.io/port: '8080'
+    spec:
+      containers:
+        - image: avthart/hello-app:1.0.0
+          name: hello-world
+          ports:
+            - name: web
+              containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "150m"
+          # liveness probes to know when to restart a Container.
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: web
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          # readiness probes to know when a Container is ready to start accepting traffic.
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: web
+            initialDelaySeconds: 10
+            periodSeconds: 5

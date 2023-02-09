@@ -1,0 +1,24 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: prometheus-data-2
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage
+  capacity:
+    storage: 8Gi
+  local:
+    path: /data/prometheus
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: In
+            values:
+              - prometheus
