@@ -28,7 +28,7 @@ helm installed into /usr/local/bin/helm
 Verify that helm is working:
 
 ```bash
-$ helm version
+helm version
 `````
 
 Output

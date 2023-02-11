@@ -38,3 +38,40 @@ git clone https://github.com/Jurgen-Allewijn/Workshop-K8S.git
 
 - [Logging](k8s/logging/)
 - [Monitoring](k8s/monitoring/)
+
+##  Clean up
+
+### 1. Removing the AKS Cluster
+
+```bash
+az aks delete --name AKS-Workshop --resource-group rg-AKS-Resourcegroup -y 
+```
+> Note: It might take 3-6 minutes to delete the cluster
+
+
+### 2. Removing the Azure Resource Group
+
+```bash
+az group delete --resource-group rg-AKS-Workshop -y
+```
+
+### 3. Removing the AKS Kubeconfig Entries
+
+```bash
+kubectl config delete-cluster AKS-Workshop
+kubectl config delete-context AKS-Workshop
+kubectl config delete-user clusterUser_rg-AKS-workshop_AKS-Workshop
+```
+
+### 4. Deleting the Cloud Shell Instance
+
+```bash
+clouddrive unmount
+```
+> You will be prompted to confirm twice.
+
+>WARN: Removing a file share from Cloud Shell will terminate your current session.
+Do you want to continue(y/n): y
+
+> WARN: You will be prompted to create and mount a new file share on your next session.
+Do you want to continue(y/n): y

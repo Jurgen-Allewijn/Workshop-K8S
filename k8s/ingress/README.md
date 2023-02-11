@@ -18,7 +18,7 @@ https://kubernetes.github.io/ingress-nginx/
 Before installing NGINX, create a namespace for your ingress resources.
 
 ```bash
-$ kubectl create namespace ingress-nginx
+kubectl create namespace ingress-nginx
 ```
 
 ### Add the ingress-nginx helm repository
@@ -26,36 +26,47 @@ $ kubectl create namespace ingress-nginx
 NGINX Ingress controller can be installed via Helm using the chart from the project repository. To install the chart with the release name **ingress-nginx**
 
 ```bash
-$ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+````
+Output:
+```bash
 "ingress-nginx" has been added to your repositories
+````
 
-$ helm repo update
+```bash
+helm repo update
 ```
 
 ## Installation
 
 ```bash
-$ helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
 ```
 
 When the Kubernetes load balancer service is created for the NGINX ingress controller, normally it waits for dynamic public IP address to be assigned, as shown in the following example output:
 
 ```bash
-$ kubectl --namespace  ingress-nginx get services -o wide -w ingress-nginx-controller
+kubectl --namespace  ingress-nginx get services -o wide -w ingress-nginx-controller
+`````
+Example ouput
 
+```bash
 NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE   SELECTOR
 ingress-nginx-controller   LoadBalancer   10.111.45.151   <pending>     80:30011/TCP,443:30740/TCP   41s   app.kubernetes.io/component=controller,app.kubernetes.io/instance=ingress-nginx,app.kubernetes.io/name=ingress-nginx
-```
+````
 
 Confirm the installation:
 
 ```bash
 $ helm list --all-namespaces
+````
 
+Example output:
+
+```bash
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
 ingress-nginx   ingress-nginx   1               2021-05-19 15:02:26.127627562 +0000 UTC deployed        ingress-nginx-3.31.0    0.46.0
-```
+````
 
 ## Configuration
 
@@ -64,8 +75,8 @@ The service type in the Helm chart is based on a external Loadbalancer. In our e
 Change the port numbers of the HTTP to 30080 & HTTPS to 30443 and set the `type: LoadBalancer` in the yaml to `type: NodePort`.
 
 ```bash
-$ kubectl edit service -n ingress-nginx ingress-nginx-controller
-```
+kubectl edit service -n ingress-nginx ingress-nginx-controller
+````
 
 The spec configuration of the service should look like this:
 
@@ -94,6 +105,7 @@ type: NodePort
 ## Test
 
 Test if you can reach the HTTP & HTTP endpoint with your browser. No ingress rules have been created yet, so the NGINX ingress controller's default 404 page is displayed.
+
 
 ```
 http://kb-student<NUMBER>-node<NUMBER>.westeurope.cloudapp.azure.com:30080
