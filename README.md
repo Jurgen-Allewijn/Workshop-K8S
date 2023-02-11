@@ -1,10 +1,6 @@
 # Kubernetes workshop
 
-This project contains labs for the kubernetes workshop.
-
-# In this workshop we will use the application:
-
-#- <https://github.com/avthart/hello-app>
+This project contains labs for the kubernetes workshop. In this workshop we will deploy a kubernetes cluster. We look at deployment strategies and take a first glance at observability.
 
 - [Prerequisites](k8s/prerequisites/)
 
@@ -24,7 +20,11 @@ In this workshop we are using Azure Kubernetes Service (AKS).
 
 ## Clone Git Repository
 
-- [Clone Git Repository](k8s/git/)
+For we proceed with the excercises, let's first clone the repository, so all the files are locally available.
+
+```bash
+git clone https://github.com/Jurgen-Allewijn/Workshop-K8S.git
+````
 
 ## Deployment Strategies
 
