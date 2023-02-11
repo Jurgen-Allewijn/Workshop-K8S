@@ -9,9 +9,9 @@ In this workshop we are installing Helm 3 instead of Helm 2 for security reasons
 In our case we will install helm on the master node node-0 using the following commands:
 
 ```bash
-$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-$ chmod 700 get_helm.sh
-$ ./get_helm.sh
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 ```
 
 Here is a sample installation output:
@@ -21,7 +21,7 @@ Downloading https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz
 Verifying checksum... Done.
 Preparing to install helm into /usr/local/bin
 helm installed into /usr/local/bin/helm
-```
+````
 
 ## Confirm the installation of Helm 3
 
@@ -29,9 +29,13 @@ Verify that helm is working:
 
 ```bash
 $ helm version
+`````
 
+Output
+
+```bash
 version.BuildInfo{Version:"v3.5.4", GitCommit:"1b5edb69df3d3a08df77c9902dc17af864ff05d1", GitTreeState:"clean", GoVersion:"go1.15.11"}
-```
+````
 
 ## Working with Repositories
 
@@ -40,8 +44,11 @@ Once you have Helm ready, you can add a chart repository. Helm 3 no longer ships
 The helm repo command group provides commands to add, list, and remove repositories. New repositories can be added with helm repo add:
 
 ```bash
-$ helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add bitnami https://charts.bitnami.com/bitnami
+````
+Ouput: 
 
+```bash
 "bitnami" has been added to your repositories
 ```
 
@@ -50,7 +57,7 @@ Because chart repositories change frequently, at any point you can make sure you
 You can see which repositories are configured using helm repo list:
 
 ```bash
-$ helm repo list
+helm repo list
 ```
 
 Repositories can be removed with helm repo remove.
