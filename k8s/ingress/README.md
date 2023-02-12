@@ -58,7 +58,7 @@ ingress-nginx-controller   LoadBalancer   10.111.45.151   <pending>     80:30011
 Confirm the installation:
 
 ```bash
-$ helm list --all-namespaces
+helm list --all-namespaces
 ````
 
 Example output:
@@ -77,6 +77,8 @@ Change the port numbers of the HTTP to 30080 & HTTPS to 30443 and set the `type:
 ```bash
 kubectl edit service -n ingress-nginx ingress-nginx-controller
 ````
+> **Note**
+> 'kubectl edit' uses vi editor as default. If you need help with vi editor commands, visit this [link](https://www.redhat.com/sysadmin/introduction-vi-editor)
 
 The spec configuration of the service should look like this:
 
