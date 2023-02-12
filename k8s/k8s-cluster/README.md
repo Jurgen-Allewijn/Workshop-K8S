@@ -43,7 +43,7 @@ az aks get-credentials --resource-group rg-AKS-workshop --name AKS-Workshop
 List all your nodes in the cluster:
 
 ```bash
-$ kubectl get nodes
+kubectl get nodes
 ```
 We can see the pods running on the master: etcd, api-server, controller manager and scheduler, as well as etcd and Weave pods.
 
@@ -52,10 +52,10 @@ We now have a Kubernetes cluster with one master and two workers
 TIP! for ease of use set autocompletion and alias for kubectl
 
 ```bash
-$ source <(kubectl completion bash)
-$ echo "source <(kubectl completion bash)" >> ~/.bashrc
-$ alias k=kubectl
-$ complete -F __start_kubectl k
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+alias k=kubectl
+complete -F __start_kubectl k
 ```
 
 Now you can use the command `k` instead of `kubectl`
