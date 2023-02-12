@@ -6,14 +6,14 @@ With kubectl the logs can be viewed.
 ### Goto the git workshop logging directory:
 
 ```bash
-$ cd ~/kubernetes-workshop/k8s/logging/
-```
+cd ~/kubernetes-workshop/k8s/logging/
+````
 
 ### view the content of counter-pod.yaml
 
 ```bash
-$ cat counter-pod.yaml
-```
+cat counter-pod.yaml
+````
 
 The output is:
 
@@ -37,17 +37,17 @@ spec:
 ### Create log container in default namespace
 
 ```bash
-$ kubectl apply -f counter-pod.yaml
-```
+kubectl apply -f counter-pod.yaml
+````
 
 ### The output is:
 
-```
+```bash
 pod/counter created
-```
+````
 
 ### Look at the logs of this pod
 
 ```bash
-$ kubectl logs counter
-```
+kubectl logs counter
+````
