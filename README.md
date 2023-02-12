@@ -44,7 +44,7 @@ git clone https://github.com/Jurgen-Allewijn/Workshop-K8S.git
 ### 1. Removing the AKS Cluster
 
 ```bash
-az aks delete --name AKS-Workshop --resource-group rg-AKS-Resourcegroup -y 
+az aks delete --name AKS-Workshop --resource-group rg-AKS-workshop -y 
 ```
 > Note: It might take 3-6 minutes to delete the cluster
 
