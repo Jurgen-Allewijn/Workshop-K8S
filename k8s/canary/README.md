@@ -7,28 +7,28 @@ A canary deployment consists of routing a subset of users to a new functionality
 ## Go to the right directory
 
 ```bash
-$ cd ~/kubernetes-workshop/k8s/canary/
-```
+cd ~/kubernetes-workshop/k8s/canary/
+````
 
 ## Create namespace
 
 ```bash
-$ kubectl create namespace canary
-```
+kubectl create namespace canary
+````
 
 ## Deploy v1
 
 ```bash
-$ kubectl -n canary apply -f hello-world-v1.yaml
-```
+kubectl -n canary apply -f hello-world-v1.yaml
+````
 
 ## Test
 
 Test:
 
 ```bash
-$ curl http://$IP_ADDRESS:30080/api
-```
+curl http://$IP_ADDRESS:30080/api
+````
 
 Or in browser:
 http://[PUBLIC IP_ADDRESS]:30080
@@ -36,32 +36,32 @@ http://[PUBLIC IP_ADDRESS]:30080
 ## Deploy v2 besides v1
 
 ```bash
-$ kubectl -n canary apply -f hello-world-v2.yaml
-```
+kubectl -n canary apply -f hello-world-v2.yaml
+````
 
 Check that requests are handled by v1 and v2
 
 ```bash
-$ while sleep 0.5; do curl $IP_ADDRESS:30080/api; done
-```
+while sleep 0.5; do curl $IP_ADDRESS:30080/api; done
+````
 
 Stop with CONTROL-C
 
 # Scale v2 to 3
 
 ```bash
-$ kubectl -n canary scale --replicas=3 deployment/hello-world-v2
-```
+kubectl -n canary scale --replicas=3 deployment/hello-world-v2
+````
 
 ```bash
-$ kubectl -n canary get pods -w
-```
+kubectl -n canary get pods -w
+````
 
 Test:
 
 ```bash
-$ curl http://$IP_ADDRESS:30080/api
-```
+curl http://$IP_ADDRESS:30080/api
+````
 
 Or in browser:
 http://[PUBLIC IP ADDRESS]:30080
@@ -69,18 +69,18 @@ http://[PUBLIC IP ADDRESS]:30080
 # Delete v1
 
 ```bash
-$ kubectl -n canary delete deployment/hello-world-v1
-```
+kubectl -n canary delete deployment/hello-world-v1
+````
 
 ```bash
-$ kubectl -n canary get pods
-```
+kubectl -n canary get pods
+````
 
 Test:
 
 ```bash
-$ curl http://$IP_ADDRESS:30080/api
-```
+curl http://$IP_ADDRESS:30080/api
+````
 
 Or in browser:
 http://[PUBLIC IP ADDRESS]:30080
@@ -88,5 +88,5 @@ http://[PUBLIC IP ADDRESS]:30080
 # Clean up
 
 ```bash
-$ kubectl delete ns canary
-```
+kubectl delete ns canary
+````

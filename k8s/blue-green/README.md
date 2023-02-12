@@ -7,32 +7,32 @@ A blue/green deployment differs from a ramped deployment because the “green”
 ## Go to the right diorectory
 
 ```bash
-$ cd ~/kubernetes-workshop/k8s/blue-green/
-```
+cd ~/kubernetes-workshop/k8s/blue-green/
+````
 
 ## Create namespace
 
 ```bash
-$ kubectl create ns blue-green
-```
+kubectl create ns blue-green
+````
 
 ## Deploy Blue v1
 
 ```bash
-$ kubectl -n blue-green apply -f hello-world-blue.yaml
-```
+kubectl -n blue-green apply -f hello-world-blue.yaml
+````
 
 ```bash
-$ kubectl -n blue-green get pods
-```
+kubectl -n blue-green get pods
+````
 
 ## Test
 
 With CURL:
 
 ```bash
-$ curl $IP_ADDRESS:30080/api
-```
+curl $IP_ADDRESS:30080/api
+````
 
 And in browser you should see the blue version (1.0.0):
 
@@ -41,12 +41,12 @@ And in browser you should see the blue version (1.0.0):
 ## Deploy green v2
 
 ```bash
-$ kubectl -n blue-green apply -f hello-world-green.yaml
-```
+kubectl -n blue-green apply -f hello-world-green.yaml
+````
 
 ```bash
-$ kubectl -n blue-green get pods -w
-```
+kubectl -n blue-green get pods -w
+````
 
 Stop with CONTROL-C
 
@@ -55,8 +55,8 @@ Stop with CONTROL-C
 With CURL:
 
 ```bash
-$ curl $IP_ADDRESS:30080/api
-```
+curl $IP_ADDRESS:30080/api
+````
 
 And in browser you should see the blue version (1.0.0):
 
@@ -67,22 +67,22 @@ http://[PUBLIC IP_ADDRESS]:30080
 Check that service is pointing to `blue` version:
 
 ```bash
-$ kubectl -n blue-green describe svc hello-world-service
-```
+kubectl -n blue-green describe svc hello-world-service
+````
 
 Change to `green` version:
 
 ```bash
-$ kubectl -n blue-green patch service hello-world-service -p '{"spec":{"selector":{"app":"hello-world-green"}}}'
-```
+kubectl -n blue-green patch service hello-world-service -p '{"spec":{"selector":{"app":"hello-world-green"}}}'
+````
 
 ## Test
 
 With CURL:
 
 ```bash
-$ curl $IP_ADDRESS:30080/api
-```
+curl $IP_ADDRESS:30080/api
+````
 
 And in browser you should see the green version (2.0.0):
 
@@ -91,5 +91,5 @@ http://[PUBLIC IP_ADDRESS]:30080
 # Clean up
 
 ```bash
-$ kubectl delete ns blue-green
-```
+kubectl delete ns blue-green
+````

@@ -7,26 +7,26 @@ A deployment defined with a strategy of type Recreate will terminate all the run
 # Go to the right directory
 
 ```bash
-$ cd ~/kubernetes-workshop/k8s/recreate/
-```
+cd ~/kubernetes-workshop/k8s/recreate/
+````
 
 # Create namespace
 
 ```bash
-$ kubectl create ns recreate
-```
+kubectl create ns recreate
+````
 
 # Deploy App v1
 
 ```bash
-$ kubectl apply -n recreate -f app-v1.yaml
-```
+kubectl apply -n recreate -f app-v1.yaml
+````
 
 Test:
 
 ```bash
-$ curl http://$IP_ADDRESS:30080/api
-```
+curl http://$IP_ADDRESS:30080/api
+````
 
 Or in browser:
 <http://[PUBLIC IP_ADDRESS]:30080>
@@ -34,14 +34,14 @@ Or in browser:
 # Deploy App v2
 
 ```bash
-$ kubectl apply -n recreate -f app-v2.yaml
-```
+kubectl apply -n recreate -f app-v2.yaml
+````
 
 Downtime is expected because v1 is killed before v2 is started and healthy:
 
 ```bash
-$ curl http://$IP_ADDRESS:30080/api
-```
+curl http://$IP_ADDRESS:30080/api
+````
 
 Or in browser:
 <http://[PUBLIC IP_ADDRESS]:30080>
@@ -49,5 +49,5 @@ Or in browser:
 # Clean up
 
 ```bash
-$ kubectl delete ns recreate
-```
+kubectl delete ns recreate
+````

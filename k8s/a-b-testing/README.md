@@ -11,35 +11,35 @@ Also see https://medium.com/@domi.stoehr/canary-deployments-on-kubernetes-withou
 ## Go to the right directory
 
 ```bash
-$ cd ~/kubernetes-workshop/k8s/a-b-testing
-```
+cd ~/kubernetes-workshop/k8s/a-b-testing
+````
 
 ## Create namespace
 
 ```bash
-$ kubectl create namespace ab-v1
-$ kubectl create namespace ab-v2
-```
+kubectl create namespace ab-v1
+kubectl create namespace ab-v2
+````
 
 ## Deploy v1
 
 ```bash
-$ kubectl -n ab-v1 apply -f hello-world-v1.yaml
-```
+kubectl -n ab-v1 apply -f hello-world-v1.yaml
+````
 
 ## Create Ingress
 
 ```bash
-$ kubectl -n ab-v1 apply -f hello-world-ingress.yaml
-```
+kubectl -n ab-v1 apply -f hello-world-ingress.yaml
+````
 
 ## Test
 
 Test:
 
 ```bash
-$ curl http://$IP_ADDRESS:30080/api
-```
+curl http://$IP_ADDRESS:30080/api
+````
 
 Or in browser:
 http://[PUBLIC IP ADDRESS]:30080
@@ -49,25 +49,25 @@ HTTP requests should be routed to v1
 ## Deploy v2 besides v1 in another namespace
 
 ```bash
-$ kubectl -n ab-v2 apply -f hello-world-v2.yaml
-```
+kubectl -n ab-v2 apply -f hello-world-v2.yaml
+````
 
 ## Route requests by header to v2
 
 ```bash
-$ kubectl -n ab-v2 apply -f hello-world-ingress-v2.yaml
-```
+kubectl -n ab-v2 apply -f hello-world-ingress-v2.yaml
+````
 
 ## Test
 
 Check that requests are handled by v2
 
 ```bash
-$ curl -H "Canary: always" $IP_ADDRESS:30080/api
-```
+curl -H "Canary: always" $IP_ADDRESS:30080/api
+````
 
 ## Clean up
 
 ```bash
-$ kubectl delete ns ab-v1 ab-v2
-```
+kubectl delete ns ab-v1 ab-v2
+````
