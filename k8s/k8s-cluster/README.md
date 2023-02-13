@@ -22,14 +22,6 @@ az aks create --resource-group rg-AKS-workshop --name AKS-Workshop --generate-ss
 > **Note**
 > After about 5~10 min the cluster should be deployed
 
-# Step 2 Update cluster
-
-```bash
-az aks update --resource-group rg-AKS-workshop --name AKS-Workshop --no-uptime-sla
-````
-
-> **Note**
-> After this command has completed, the free version of AKS is used!
 
 # Get credentials to allow you to access the cluster with kubectl
 
@@ -38,16 +30,13 @@ az aks get-credentials --resource-group rg-AKS-workshop --name AKS-Workshop
 ````
 
 
-
-
 List all your nodes in the cluster:
 
 ```bash
-kubectl get nodes
+kubectl get nodes -o wide
 ```
-We can see the pods running on the master: etcd, api-server, controller manager and scheduler, as well as etcd and Weave pods.
 
-We now have a Kubernetes cluster with one master and two workers
+We now have a Kubernetes cluster three nodes. The control plane is not visible as it is managed by Microsoft. Adding the -o wide at the end of the command gives  more info about the nodes like ip adress, kukbernetes version, etc.
 
 TIP! for ease of use set autocompletion and alias for kubectl
 
@@ -117,12 +106,6 @@ Scale deployment
 
 ```
 kubectl scale --replicas=n deployments/<NAME> -n <NAMESPACE>
-```
-
-Scale deployment customer to 50 pods and follow the deployment
-
-```
-kubectl scale --replicas=50 deployments/customer -n yaobank-customer && kubectl get -w deployments -A | egrep yao
 ```
 
 List all nodes, with more details

@@ -68,48 +68,21 @@ NAME            NAMESPACE       REVISION        UPDATED                         
 ingress-nginx   ingress-nginx   1               2021-05-19 15:02:26.127627562 +0000 UTC deployed        ingress-nginx-3.31.0    0.46.0
 ````
 
-## Configuration
+Check if the ingress controller is listening on port 80 and 443
 
-The service type in the Helm chart is based on a external Loadbalancer. In our environment there is no external Loadbalancer configured which exposes the service externally using a cloud provider's loadbalancer, such as for example Azure Loadbalancer. When configuring it on-premise you can make use of [MetalLB](https://metallb.universe.tf/), which is a loadbalancer implementation for bare metal.
-
-Change the port numbers of the HTTP to 30080 & HTTPS to 30443 and set the `type: LoadBalancer` in the yaml to `type: NodePort`.
+Deploy a demo app
 
 ```bash
-kubectl edit service -n ingress-nginx ingress-nginx-controller
+cd ~/Workshop-K8S/k8s/ingress
+kubectl apply -f app.yml
 ````
-> **Note**
-> 'kubectl edit' uses vi editor as default. If you need help with vi editor commands, visit this [link](https://www.redhat.com/sysadmin/introduction-vi-editor)
 
-The spec configuration of the service should look like this:
+Validate if the application and services are running
 
-```yaml
-
----
-ports:
-  - name: http
-    nodePort: 30080
-    port: 80
-    protocol: TCP
-    targetPort: http
-  - name: https
-    nodePort: 30443
-    port: 443
-    protocol: TCP
-    targetPort: https
-selector:
-  app.kubernetes.io/component: controller
-  app.kubernetes.io/instance: ingress-nginx
-  app.kubernetes.io/name: ingress-nginx
-sessionAffinity: None
-type: NodePort
-```
-
-## Test
-
-Test if you can reach the HTTP & HTTP endpoint with your browser. No ingress rules have been created yet, so the NGINX ingress controller's default 404 page is displayed.
+```bash
+kubectl get pods,svc -A
+`````
 
 
-```
-http://kb-student<NUMBER>-node<NUMBER>.westeurope.cloudapp.azure.com:30080
-https://kb-student<NUMBER>-node<NUMBER>.westeurope.cloudapp.azure.com::30443
-```
+
+Go to your browser and connect to http://[External ip adress load balancer] and https://[External ip adress load balancer]
