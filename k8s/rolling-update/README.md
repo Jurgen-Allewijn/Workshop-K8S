@@ -60,7 +60,7 @@ echo $IP_ADDRESS
 Test with curl:
 
 ```bash
-url http://$IP_ADDRESS:30080/api
+curl http://$IP_ADDRESS:30080/api
 ```
 
 Or in browser
