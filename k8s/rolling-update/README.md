@@ -13,7 +13,7 @@ kubectl create namespace rolling-update
 ## Deploy App
 
 ```bash
-cd ~/kubernetes-workshop/k8s/rolling-update
+cd ~/Workshop-K8S/k8s/rolling-update
 ````
 
 ```bash
@@ -50,22 +50,21 @@ kubectl -n rolling-update apply -f hello-world-ingress.yaml
 
 ## Test
 
-Put the Public IP adres of node0 in a enviroment variable, don't forget to change the student number.
+Note down  the Public IP adres of the load balancer.
 
 ```bash
-export IP_ADDRESS="$(nslookup kb-student<NUMBER>-node0.westeurope.cloudapp.azure.com | awk '/^Address:/ {A=$2}; END {print A}')"
-echo $IP_ADDRESS
+kubectl get svc -A
 ````
 
 Test with curl:
 
 ```bash
-curl http://$IP_ADDRESS:30080/api
+curl http://[public ip adress loadbalancer]/api
 ```
 
 Or in browser
 
-http://[PUBLIC IP]:30080
+http://[PUBLIC IP loadbalancer]
 
 # Self healing
 
@@ -91,19 +90,19 @@ kubectl -n rolling-update get pods
 Check health check:
 
 ```bash
-curl $IP_ADDRESS:30080/health
+curl [public ip adress load balancer]/health
 ````
 
 Marks server as down:
 
 ```bash
-curl -X POST $IP_ADDRESS:30080/down
+curl -X POST [public ip adress load balancer]/down
 ````
 
 Check health check:
 
 ```bash
-curl $IP_ADDRESS:30080/health
+curl [public ip adress load balancer]/health
 ```
 
 Check that health check is failed:
@@ -143,7 +142,7 @@ kubectl -n rolling-update describe pod hello-world
 Which version is running? Stil alive?
 
 ```bash
-curl $IP_ADDRESS:30080/api
+curl [public ip adress load balancer]/api
 ```
 
 Rollback App
@@ -173,7 +172,7 @@ kubectl -n rolling-update rollout status deployments/hello-world
 Which version is running? Was there any downtime?
 
 ```bash
-curl $IP_ADDRESS:30080/api
+curl [public ip adress load balancer]/api
 ````
 
 # Scaling
@@ -195,7 +194,7 @@ kubectl -n rolling-update get pods
 Check that request is handled by all instances:
 
 ```bash
-while sleep 0.5; do curl $IP_ADDRESS:30080/api; done
+while sleep 0.5; do curl [public ip adress load balancer]/api; done
 ````
 
 Stop with CONTROL-C

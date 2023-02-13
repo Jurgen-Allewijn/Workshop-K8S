@@ -7,7 +7,7 @@ A canary deployment consists of routing a subset of users to a new functionality
 ## Go to the right directory
 
 ```bash
-cd ~/kubernetes-workshop/k8s/canary/
+cd ~/Workshop-K8S/k8s/canary/
 ````
 
 ## Create namespace
@@ -27,11 +27,11 @@ kubectl -n canary apply -f hello-world-v1.yaml
 Test:
 
 ```bash
-curl http://$IP_ADDRESS:30080/api
+curl http://[public ip adress load balancer]/api
 ````
 
 Or in browser:
-http://[PUBLIC IP_ADDRESS]:30080
+http://[public ip adress load balancer]
 
 ## Deploy v2 besides v1
 
@@ -42,7 +42,7 @@ kubectl -n canary apply -f hello-world-v2.yaml
 Check that requests are handled by v1 and v2
 
 ```bash
-while sleep 0.5; do curl $IP_ADDRESS:30080/api; done
+while sleep 0.5; do curl [public ip adress load balancer]/api; done
 ````
 
 Stop with CONTROL-C
@@ -60,11 +60,11 @@ kubectl -n canary get pods -w
 Test:
 
 ```bash
-curl http://$IP_ADDRESS:30080/api
+curl http://[public ip adress load balancer]/api
 ````
 
 Or in browser:
-http://[PUBLIC IP ADDRESS]:30080
+http://[public ip adress load balancer]
 
 # Delete v1
 
@@ -79,11 +79,11 @@ kubectl -n canary get pods
 Test:
 
 ```bash
-curl http://$IP_ADDRESS:30080/api
+curl http://[public ip adress load balancer]/api
 ````
 
 Or in browser:
-http://[PUBLIC IP ADDRESS]:30080
+http://[public ip adress load balancer]
 
 # Clean up
 

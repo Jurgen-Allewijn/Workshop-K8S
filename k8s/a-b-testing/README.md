@@ -11,7 +11,7 @@ Also see https://medium.com/@domi.stoehr/canary-deployments-on-kubernetes-withou
 ## Go to the right directory
 
 ```bash
-cd ~/kubernetes-workshop/k8s/a-b-testing
+cd ~/Workshop-K8S/k8s/a-b-testing
 ````
 
 ## Create namespace
@@ -38,11 +38,11 @@ kubectl -n ab-v1 apply -f hello-world-ingress.yaml
 Test:
 
 ```bash
-curl http://$IP_ADDRESS:30080/api
+curl http:/[public ip adress load balancer]/api
 ````
 
 Or in browser:
-http://[PUBLIC IP ADDRESS]:30080
+http://[public ip adress load balancer]
 
 HTTP requests should be routed to v1
 
@@ -63,7 +63,7 @@ kubectl -n ab-v2 apply -f hello-world-ingress-v2.yaml
 Check that requests are handled by v2
 
 ```bash
-curl -H "Canary: always" $IP_ADDRESS:30080/api
+curl -H "Canary: always" [public ip adress load balancer]/api
 ````
 
 ## Clean up

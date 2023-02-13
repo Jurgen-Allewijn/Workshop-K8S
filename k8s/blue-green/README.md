@@ -7,7 +7,7 @@ A blue/green deployment differs from a ramped deployment because the “green”
 ## Go to the right diorectory
 
 ```bash
-cd ~/kubernetes-workshop/k8s/blue-green/
+cd ~/Workshop-K8S/k8s/blue-green/
 ````
 
 ## Create namespace
@@ -31,12 +31,12 @@ kubectl -n blue-green get pods
 With CURL:
 
 ```bash
-curl $IP_ADDRESS:30080/api
+curl [public ip adress load balancer]/api
 ````
 
 And in browser you should see the blue version (1.0.0):
 
-<http://[PUBLIC IP_ADDRESS>]:30080
+<http://[public ip adress load balancer]
 
 ## Deploy green v2
 
@@ -55,12 +55,12 @@ Stop with CONTROL-C
 With CURL:
 
 ```bash
-curl $IP_ADDRESS:30080/api
+curl [public ip adress load balancer]/api
 ````
 
 And in browser you should see the blue version (1.0.0):
 
-http://[PUBLIC IP_ADDRESS]:30080
+http://[public ip adress load balancer]
 
 ## Switch to green
 
@@ -81,12 +81,12 @@ kubectl -n blue-green patch service hello-world-service -p '{"spec":{"selector":
 With CURL:
 
 ```bash
-curl $IP_ADDRESS:30080/api
+curl [public ip adress load balancer]/api
 ````
 
 And in browser you should see the green version (2.0.0):
 
-http://[PUBLIC IP_ADDRESS]:30080
+http://[public ip adress load balancer]
 
 # Clean up
 
