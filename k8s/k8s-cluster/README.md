@@ -23,8 +23,8 @@ az aks create --resource-group rg-AKS-workshop --name AKS-Workshop --generate-ss
 > After about 5~10 min the cluster should be deployed
 
 
-# Get admin credentials to allow you to access the cluster with kubectl
-Default is user credentials
+# Get credentials to allow you to access the cluster with kubectl
+Using the switch --admin or -a admin credentials are added. Default is user credentials
 
 ```bash
 az aks get-credentials --resource-group rg-AKS-workshop --name AKS-Workshop --admin
