@@ -6,7 +6,7 @@ With kubectl the logs can be viewed.
 ### Goto the git workshop logging directory:
 
 ```bash
-cd ~/kubernetes-workshop/k8s/logging/
+cd /Workshop-K8S/k8s/logging/
 ````
 
 ### view the content of counter-pod.yaml
