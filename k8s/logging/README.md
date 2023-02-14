@@ -49,5 +49,5 @@ pod/counter created
 ### Look at the logs of this pod
 
 ```bash
-kubectl logs counter
+kubectl logs counter -f
 ````
