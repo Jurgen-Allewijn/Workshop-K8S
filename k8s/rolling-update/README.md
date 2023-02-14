@@ -120,7 +120,7 @@ kubectl -n rolling-update get pods -o wide
 Update App to use new version
 
 ```bash
-kubectl -n rolling-update set image --record deployments/hello-world hello-world=avthart/hello-app:1.0.1
+kubectl -n rolling-update set image deployments/hello-world hello-world=avthart/hello-app:1.0.1
 ````
 
 This results in a new pod with status broken version (status CrashLoopBackOff). The new version is broken :-(
@@ -162,7 +162,7 @@ kubectl -n rolling-update rollout undo deployments/hello-world
 Update to working version:
 
 ```bash
-kubectl -n rolling-update set image --record deployments/hello-world hello-world=avthart/hello-app:1.0.3
+kubectl -n rolling-update set image deployments/hello-world hello-world=avthart/hello-app:1.0.3
 ````
 
 ```bash
