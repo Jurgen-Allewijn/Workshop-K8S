@@ -14,7 +14,7 @@ All commands exercise are executed into Azure Cloud shell. Azure Cloud Shell req
 
 ### Open cloud shell
 
-![alt text](/k8s/prerequisites/azure-portal-cloud-shell.pngk "Azure Cloud Shell")
+![alt text](/k8s/prerequisites/azure-portal-cloud-shell.png "Azure Cloud Shell")
 
 ### Create a new storage account 
 ![alt text](/k8s/prerequisites/azure-portal-storage-account.png "Azure Cloud Shell")
