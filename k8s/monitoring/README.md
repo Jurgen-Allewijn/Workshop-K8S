@@ -72,18 +72,19 @@ ingress-nginx-controller-metrics     ClusterIP      10.97.209.222    <none>     
 prometheus-server                    LoadBalancer   10.106.249.223   <IP or URI>   80:32563/TCP                 78s
 ```
 
-Configure the port to `nodeport: 31413`
 
 ```bash
 kubectl edit service -n ingress-nginx prometheus-server
 ````
+
+Configure the port to `port: 80`
 
 The part of the spec configuration of the service should look like this:
 
 ```yaml
 ---
 ports:
-  - nodePort: 31413
+  - nodePort: 32563
     port: 80
     protocol: TCP
     targetPort: 9090
@@ -134,14 +135,14 @@ kubectl get svc -n ingress-nginx
 
 ```log
 NAME                                 TYPE             CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-grafana                              LoadBalancer     10.110.154.157   <IP or URI>   80:31423/TCP               11s
+grafana                              LoadBalancer     10.110.154.157   <IP or URI>   80:31423/TCP                 11s
 ingress-nginx-controller             LoadBalancer     10.99.168.46     <IP or URI>   80:30080/TCP,443:30443/TCP   29m
 ingress-nginx-controller-admission   ClusterIP        10.100.247.181   <none>        443/TCP                      29m
 ingress-nginx-controller-metrics     ClusterIP        10.97.209.222    <none>        10254/TCP                    22m
-prometheus-server                    LoadBalancer     10.106.249.223   <IP or URI>   80:31413/TCP               15m
+prometheus-server                    LoadBalancer     10.106.249.223   <IP or URI>   80:32563/TCP                 15m
 ```
 
-Configure the port to `nodeport: 31655`
+Configure the port to `port: 80`
 
 ```bash
 kubectl edit service -n ingress-nginx grafana
@@ -152,7 +153,7 @@ The part of the spec configuration of the service should look like this:
 ```yaml
 ---
 ports:
-  - nodePort: 31655
+  - nodePort: 31423
     port: 80
     protocol: TCP
     targetPort: 3000
