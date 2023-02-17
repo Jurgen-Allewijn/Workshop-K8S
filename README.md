@@ -3,16 +3,16 @@
 This project contains labs for the kubernetes workshop. In this workshop we will deploy a kubernetes cluster. We look at deployment strategies and take a first glance at observability.
 
 
-- [Create Azure cluster](/k8s/Azure-cluster/)
+- [Create Azure cluster](k8s/Azure-cluster/)
 
 or
 
-- [Create AWS cluster](/k8s/AWS-cluster/)
+- [Create AWS cluster](k8s/AWS-cluster/)
 
 
 #### Usefull commands
 
-- [Usefull commands](/k8s/k8s-commands/) 
+- [Usefull commands](k8s/k8s-commands/) 
 
 ### Clone Git Repository
 
@@ -43,5 +43,5 @@ git clone https://github.com/Jurgen-Allewijn/Workshop-K8S.git
 
 ## Cleanup
 
-- [Cleanup Azure cluster](/k8s/Azure-cluster/cleanup/)
-- [Cleanup AWS cluster](/k8s/AWS-cluster/cleanup/)
+- [Cleanup Azure cluster](k8s/Azure-cluster/cleanup/)
+- [Cleanup AWS cluster](k8s/AWS-cluster/cleanup/)
