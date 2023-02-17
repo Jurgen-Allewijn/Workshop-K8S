@@ -4,32 +4,11 @@ Helm is a tool that streamlines installing and managing Kubernetes applications 
 
 In this workshop we are installing Helm 3 instead of Helm 2 for security reasons. Helm 3 doesn’t have the server/client architecture like Helm 2. There is no tiller server component. So the installation is just for the helm command line component which interacts with Kubernetes through your kubectl configuration file and the default Kubernetes RBAC.
 
-## Install Helm 3
-
-In our case we will install helm on the master node node-0 using the following commands:
-
-```bash
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-```
-
-Here is a sample installation output:
-
-```bash
-Downloading https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz
-Verifying checksum... Done.
-Preparing to install helm into /usr/local/bin
-helm installed into /usr/local/bin/helm
-````
-
-## Confirm the installation of Helm 3
-
 Verify that helm is working:
 
 ```bash
 helm version
-`````
+```
 
 Output
 
