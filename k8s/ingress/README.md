@@ -86,3 +86,48 @@ kubectl get pods,svc -A
 
 
 Go to your browser and connect to http://[External ip adress load balancer] and https://[External ip adress load balancer]
+
+## Optional excercises
+
+
+
+##  Azure Voting App
+
+This sample creates a multi-container application in an Azure Kubernetes Service (AKS) cluster. The application interface has been built using Python / Flask. The data component is using Redis. More information/ backgroud of this app can be found here https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli
+
+First we deploy the application using the kubectl command.
+
+```bash
+kubectl apply -f azure-vote.yaml
+````
+
+Output:
+```bash
+deployment "azure-vote-back" created
+service "azure-vote-back" created
+deployment "azure-vote-front" created
+service "azure-vote-front" created
+````
+
+It can take some time to deploy everything. To check if the deployment is ready for use, use the --watch  or -w switch
+
+```bash
+kubectl get service azure-vote-front --watch
+````
+
+The EXTERNAL-IP output for the azure-vote-front service will initially show as pending.
+
+```bash
+NAME               TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)        AGE
+azure-vote-front   LoadBalancer   10.0.37.27   <pending>     80:30572/TCP   6s
+````
+
+Once the EXTERNAL-IP address changes from pending to an actual public IP address, use CTRL-C to stop the kubectl watch process. The following example output shows a valid public IP address assigned to the service:
+
+```bash
+azure-vote-front   LoadBalancer   10.0.37.27   52.179.23.131   80:30572/TCP   2m
+````
+
+To check if the application is working open a web browser to the external IP address of your service.
+
+![alt text](/k8s/ingress/azure-voting-application.png)
