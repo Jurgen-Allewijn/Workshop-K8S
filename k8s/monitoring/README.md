@@ -77,7 +77,7 @@ prometheus-server                    LoadBalancer   10.106.249.223   <IP or URI>
 kubectl edit service -n ingress-nginx prometheus-server
 ````
 
-Configure the port to `port: 80`
+Configure the port to `port: 80` and type to `LoadBalancer`
 
 The part of the spec configuration of the service should look like this:
 
@@ -142,7 +142,7 @@ ingress-nginx-controller-metrics     ClusterIP        10.97.209.222    <none>   
 prometheus-server                    LoadBalancer     10.106.249.223   <IP or URI>   80:32563/TCP                 15m
 ```
 
-Configure the port to `port: 80`
+Configure the port to `port: 80` and type to `LoadBalancer`
 
 ```bash
 kubectl edit service -n ingress-nginx grafana
