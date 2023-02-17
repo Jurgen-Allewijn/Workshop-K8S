@@ -66,10 +66,10 @@ kubectl get svc -n ingress-nginx
 
 ```log
 NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-ingress-nginx-controller             LoadBalancer   10.99.168.46     <pending>     80:30080/TCP,443:30443/TCP   15m
+ingress-nginx-controller             LoadBalancer   10.99.168.46     <IP or URI>   80:30080/TCP,443:30443/TCP   15m
 ingress-nginx-controller-admission   ClusterIP      10.100.247.181   <none>        443/TCP                      15m
 ingress-nginx-controller-metrics     ClusterIP      10.97.209.222    <none>        10254/TCP                    7m48s
-prometheus-server                    NodePort       10.106.249.223   <none>        9090:32563/TCP               78s
+prometheus-server                    LoadBalancer   10.106.249.223   <IP or URI>   80:32563/TCP                 78s
 ```
 
 Configure the port to `nodeport: 31413`
@@ -84,14 +84,14 @@ The part of the spec configuration of the service should look like this:
 ---
 ports:
   - nodePort: 31413
-    port: 9090
+    port: 80
     protocol: TCP
     targetPort: 9090
 selector:
   app.kubernetes.io/name: prometheus
   app.kubernetes.io/part-of: ingress-nginx
 sessionAffinity: None
-type: NodePort
+type: LoadBalancer
 ````
 
 You should see a change in the port configuration:
@@ -99,16 +99,16 @@ You should see a change in the port configuration:
 ```bash
 kubectl get svc -n ingress-nginx prometheus-server
 ````
-
+Exsample
 ```log
-NAME                TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-prometheus-server   NodePort   10.106.249.223   <none>        9090:31413/TCP   10m
+NAME                TYPE            CLUSTER-IP       EXTERNAL-IP        PORT(S)          AGE
+prometheus-server   Loadbalancer    10.106.249.223   <IP or URI>        80:31413/TCP     10m
 ````
 
 Open your browser and visit the following URL to load the Prometheus Dashboard: 
 
 ```
-http://kb-student<NUMBER>-node<NUMBER>.westeurope.cloudapp.azure.com:31413
+http://<IP or URI>
 ```
 
 ## Deploy and configure Grafana
@@ -133,12 +133,12 @@ kubectl get svc -n ingress-nginx
 ````
 
 ```log
-NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-grafana                              NodePort       10.110.154.157   <none>        3000:31423/TCP               11s
-ingress-nginx-controller             LoadBalancer   10.99.168.46     <pending>     80:30080/TCP,443:30443/TCP   29m
-ingress-nginx-controller-admission   ClusterIP      10.100.247.181   <none>        443/TCP                      29m
-ingress-nginx-controller-metrics     ClusterIP      10.97.209.222    <none>        10254/TCP                    22m
-prometheus-server                    NodePort       10.106.249.223   <none>        9090:31413/TCP               15m
+NAME                                 TYPE             CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+grafana                              LoadBalancer     10.110.154.157   <IP or URI>   80:31423/TCP               11s
+ingress-nginx-controller             LoadBalancer     10.99.168.46     <IP or URI>   80:30080/TCP,443:30443/TCP   29m
+ingress-nginx-controller-admission   ClusterIP        10.100.247.181   <none>        443/TCP                      29m
+ingress-nginx-controller-metrics     ClusterIP        10.97.209.222    <none>        10254/TCP                    22m
+prometheus-server                    LoadBalancer     10.106.249.223   <IP or URI>   80:31413/TCP               15m
 ```
 
 Configure the port to `nodeport: 31655`
@@ -153,14 +153,14 @@ The part of the spec configuration of the service should look like this:
 ---
 ports:
   - nodePort: 31655
-    port: 3000
+    port: 80
     protocol: TCP
     targetPort: 3000
 selector:
   app.kubernetes.io/name: grafana
   app.kubernetes.io/part-of: ingress-nginx
 sessionAffinity: None
-type: NodePort
+type: LoadBalancer
 ```
 
 You should see a change in the port configuration:
@@ -170,14 +170,14 @@ kubectl get svc -n ingress-nginx grafana
 ```
 
 ```log
-NAME      TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-grafana   NodePort   10.110.154.157   <none>        3000:31655/TCP   2m15s
+NAME      TYPE           CLUSTER-IP       EXTERNAL-IP       PORT(S)          AGE
+grafana   LoadBalancer   10.110.154.157   <IP or URI>       80:31655/TCP     2m15s
 ```
 
 Open your browser and visit the following URL to load the Grafana Dashboard: 
 
 ```
-http://kb-student<NUMBER>-node<NUMBER>.westeurope.cloudapp.azure.com:31655
+http://<IP or URI>
 ```
 
 The default credentials are: `admin:admin`
@@ -189,7 +189,7 @@ Navigate to lefthand panel of grafana
 Hover on the gearwheel icon for Configuration and click "Data Sources"
 Click "Add data source"
 Select "Prometheus"
-Enter the details (note: http://<CLUSTER-IP_OF_PROMETHEUS_SERVICE>:9090)
+Enter the details (note: http://<CLUSTER-IP_OF_PROMETHEUS_SERVICE>)
 Left menu (hover over +) -> Dashboard -> Click "Import"
 Enter the copy pasted json from https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/grafana/dashboards/nginx.json
 Click Import JSON

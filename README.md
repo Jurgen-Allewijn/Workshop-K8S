@@ -3,8 +3,8 @@
 This project contains labs for the kubernetes workshop. In this workshop we will deploy a kubernetes cluster. We look at deployment strategies and take a first glance at observability.
 
 
-- [Prerequisites](k8s/prerequisites/)
-
+- [Azure prerequisites](k8s/Azure-prerequisites/)
+- [AWS prerequisites](k8s/AWS-prerequisites/)
 
 ## Clone Git Repository
 
