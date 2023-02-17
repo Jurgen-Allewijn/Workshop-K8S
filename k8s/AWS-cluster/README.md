@@ -17,7 +17,7 @@ All commands exercise are executed into AWS Cloudshell.
 ![alt text](/k8s/AWS-cluster/aws-cloudshell.png "AWS Cloudshell")
 
 ### Install eksctl
-is a simple CLI tool for creating and managing clusters on EKS - Amazon's managed Kubernetes. 
+eksctl is a simple CLI tool for creating and managing clusters on EKS - Amazon's managed Kubernetes. 
 
 ```bash
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp && 
