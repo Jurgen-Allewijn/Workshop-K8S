@@ -95,7 +95,7 @@ az aks create --resource-group rg-Workshop-K8S --name Workshop-K8S --generate-ss
 Using the switch --admin or -a admin credentials are added. Default is user credentials
 
 ```bash
-az aks get-credentials --resource-group rg-Workshop-K8S--name Workshop-K8S
+az aks get-credentials --resource-group rg-Workshop-K8S --name Workshop-K8S
 ````
 
 ###  Verify AKS cluster has started

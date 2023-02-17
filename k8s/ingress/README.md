@@ -98,7 +98,7 @@ This sample creates a multi-container application in an Azure Kubernetes Service
 First we deploy the application using the kubectl command.
 
 ```bash
-kubectl apply -f azure-vote.yaml
+kubectl apply -f voting.yml
 ````
 
 Output:
