@@ -180,15 +180,8 @@ curl [public ip adress load balancer]/api
 Scale app to 3 instances
 
 ```bash
-kubectl -n rolling-update scale --replicas=3 deployment/hello-world
-````
-
-```bash
-kubectl -n rolling-update rollout status deployments/hello-world
-````
-
-```bash
-kubectl -n rolling-update get pods
+kubectl -n rolling-update scale --replicas=15 deployment/hello-world && \
+kubectl -n rolling-update get pods -w
 ````
 
 Check that request is handled by all instances:
